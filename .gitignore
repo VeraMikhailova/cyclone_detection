@@ -1,0 +1,5 @@
+*.swp
+*.bak
+./out.txt
+./out.jpg
+./yolov8*
