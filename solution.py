@@ -10,20 +10,18 @@ name = input("Provide a name of file for recognition with .jpg extension (or TRA
 model = YOLO('yolov8n' if not exists('runs/detect/yolov8n_custom/weights/best.pt') else 'runs/detect/yolov8n_custom/weights/best.pt')
 
 # Use GPU for computing
-#model.to('cuda')
+model.to('cuda')
 
 if name == "TRAIN":
 	# Output info about current setup
 	ultralytics.checks()
 	# For baseline model just a few epochs. TODO: train better for production
-	"""
 	results = model.train(data='datasets/custom/data.yaml',
 			imgsz=640,
 			batch=8,
 			epochs=1,
 			name='yolov8n_custom'
 			)
-	"""
 else:
 	# Process image
 	results = model(name)
