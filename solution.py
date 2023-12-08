@@ -3,6 +3,13 @@ from ultralytics import YOLO
 from os.path import exists
 import ultralytics
 import torch
+import eco2ai
+
+tracker = eco2ai.Tracker(
+	project_name="Cyclone_detection",
+	experiment_description="train YOLO",
+	file_name="emission.csv"
+	)
 
 name = input("Provide a name of file for recognition with .jpg extension (or TRAIN for training the model): ")
 
@@ -15,13 +22,15 @@ model.to('cuda')
 if name == "TRAIN":
 	# Output info about current setup
 	ultralytics.checks()
+	tracker.start()
 	# For baseline model just a few epochs. TODO: train better for production
 	results = model.train(data='datasets/custom/data.yaml',
 			imgsz=640,
 			batch=8,
-			epochs=1,
+			epochs=20,
 			name='yolov8n_custom'
 			)
+	tracker.stop()
 else:
 	# Process image
 	results = model(name)
