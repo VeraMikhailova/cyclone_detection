@@ -8,4 +8,4 @@ names:
 - Very intense tropical cyclone
 nc: 7
 train: /home/vera/cyclone_detection/datasets/custom/train/
-val: /home/vera/cyclone_detection/datasets/custom/train/
+val: /home/vera/cyclone_detection/datasets/custom/validate/
