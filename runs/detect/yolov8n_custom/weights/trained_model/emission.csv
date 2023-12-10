@@ -1,0 +1,4 @@
+id,project_name,experiment_description,epoch,start_time,duration(s),power_consumption(kWh),CO2_emissions(kg),CPU_name,GPU_name,OS,region/country,cost
+7ca1a333-878b-41e7-8265-48090902504e,Cyclone_detection,train YOLO,,2023-12-10 07:40:13,3410.161842107773,0.0718418457564906,0.0240921629744391,"Intel(R) Xeon(R) CPU @ 2.00GHz/1 device(s), TDP:300.0",Tesla T4 1 device(s),Linux,US/Nevada,0
+c933dd4a-80a9-4e5f-8511-65cdc7667415,Cyclone_detection,train YOLO,N/A,2023-12-10 07:40:36,3390.158920288086,0.07364946347860707,0.024698347577550885,"Intel(R) Xeon(R) CPU @ 2.00GHz/1 device(s), TDP:300.0",Tesla T4 1 device(s),Linux,US/Nevada,0
+42f9e19b-614d-458b-893b-edc7924345fa,Cyclone_detection,train YOLO,,2023-12-10 07:56:36,2401.093782186508,0.050168864461582,0.0168241286971915,"Intel(R) Xeon(R) CPU @ 2.00GHz/1 device(s), TDP:300.0",Tesla T4 1 device(s),Linux,US/Nevada,0
