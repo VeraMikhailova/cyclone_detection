@@ -7,7 +7,7 @@ import torch
 
 
 device = 'cuda' if torch.cuda.is_available() else "cpu"
-name = input("Provide a name of file for recognition with .jpg extension (or TRAIN for training the model): ")
+name = input("Provide a name of file for recognition with .jpg extension: ")
 
 # Just for baseline model we will use yolov8n.pt. TODO: replace it with better model on production
 model = YOLO('runs/detect/yolov8n_custom/weights/best.pt' if not exists('runs/detect/yolov8n_custom/weights/trained_model/the_best.pt') else 'runs/detect/yolov8n_custom/weights/trained_model/the_best.pt')
