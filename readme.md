@@ -5,7 +5,7 @@ python, gcc/clang, PIL, ultralytics
 ## Файлы репозитория:
 runs/ - предыдущие запуски тренировки модели.
 
-runs/runs/detect/yolov8n_custom/weights/trained_model/ - содержатся обученная модель и значение эмиссии CO2.
+runs/detect/yolov8n_custom/weights/trained_model/ - содержатся обученная модель и значение эмиссии CO2.
 
 datasets/ - датасеты, доступные yolo; datasets/custom/ имеет readme.md с описанием.
 
