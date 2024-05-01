@@ -3,74 +3,77 @@
 using namespace std;
 using namespace filesystem;
 
+constexpr PI = 3.14159265358979323846;
+
 int main(){
-    cout<<"Input a name of file (.jpg) and label (.txt). Results will be in file direction.txt.\n"<<flush;
-    string s_img,s_txt;
-    cin>>s_img>>s_txt;
-    if (!exists(s_img)||!exists(s_txt)){
-    	cout<<"These files do not exist!\n"<<flush;
+    cout<<"Input a name of initial image (.jpg) and label (.txt) (after using the model or after using analytical script). Results will be in file direction.txt.\n"<<flush;
+    string name_jpg,name_txt;
+    cin>>name_jpg>>name_txt;
+    if (!exists(name_jpg)||!exists(name_txt)){
+      cout<<"These files do not exist!\n"<<flush;
+      return 0;
     }	
-    ifstream ifsimg (s_img);
-    int IMG_H;
-    ifsimg>>IMG_H;
-    
-    
+    copy_file(name_jpg, "tmp.jpg");
+
+
     //яркость пикселя
     double c;
     system ("python3 convert_cv.py");
+    ifstream ifsimg ("tmp1.txt");
+    int IMG_H;
+    ifsimg>>IMG_H;
     vector <vector <double>> img (IMG_H);
     for (int i=0; i<IMG_H;++i){
-        for (int j=0;j<IMG_H;++i){
+        for (int j=0;j<IMG_H;++j){
             ifsimg>>c;
-            img[i][j]=c;
+            img[i].push_back(c);
         }
     }
-    ifstream ifstxt (s_txt);
+    ifstream ifstxt (name_txt);
     string text;
     ifstxt>>text;
-    char xx,yy;
-    xx=text[9];
-    yy=text[12];
-    int X=xx-'0';
-    int Y=yy-'0';
+    double X=int(text[9]);
+    double Y=int(text[12]);
+    double W=int(text[15]);
+    double H=int(text[18]);
     //шаг сектора
-    double b=2*3.1415926/100;
+    double b=2*PI/100;
     double x,y;
     vector<double> sum(100);
     for(int i=0;i<IMG_H;++i){
         for (int j=0;j<IMG_H;++j){
-            c=img[i][j];
-            x=j+1-X;
-            if (i+1>Y){
-                y=-1*(2*Y-i-1);
-            }
+            int c=img[i][j];
+            x=j-X;
             if (i+1<=Y){
-                y=Y-i-1;
+                y=Y-i;
             }
-   
-   
+            else{
+                y=(-1)*(i-Y);
+            }
+
+
         double a = atan2 (y,x);
-        if (y<0){
-            a+=2*3.1415926;
+        if (a<0){
+            a+=2*PI;
         }
-        sum[(int)(a/b)] += c;
+        sum[int(a/b)] += c;
         }  
     }
-    double max=0;
+    double max_sector=0;
     int imax=0;
     for (int i=0;i<100;++i){
-        if (sum[i]>max){
-            max=sum[i];
+        if (sum[i]>max_sector){
+            max_sector=sum[i];
             imax=i;
         }
-       
+
     }
-   
+
     double angle=imax*(b-1)+b/2;
-    
+
     ofstream ofs ("direction.txt");
-    ofs<<angle;
+    ofs<<to_string(angle);
 
 
     return 0;
-} 
+}
